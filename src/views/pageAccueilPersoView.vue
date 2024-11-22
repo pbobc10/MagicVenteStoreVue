@@ -1,13 +1,32 @@
 <template>
-    <div>
-        <h3>Bonjour {{       pseudo }}</h3>
-      <div >
-        <p>Reference:   {{ produit.reference }} </p>
-        <p>Libelle: {{ produit.libelle }} </p>
-        <p>Prix:  {{ produit.prix }} </p>
-        <p>Quantite En Stock: {{ produit.quantiteEnStock }}</p>
-      </div>    </div>
-  </template>
+  <div class="welcome-container">
+    <div class="content">
+      <h2 class="title">Gondor Chic</h2>
+      <h3 class="salutation">Bonjour, <span class="pseudo">{{ pseudo }}</span>!</h3>
+      <h3 class="product-title">Produit du Jour</h3>
+      <div class="product-section">
+        <!-- Product Details -->
+        <div class="product-details">
+          <p><strong>Reference:</strong> <i>{{ produit.reference }}</i></p>
+          <p><strong>Libelle:</strong> {{ produit.libelle }}</p>
+          <p><strong>Prix:</strong> {{ produit.prix }} €</p>
+          <p><strong>Quantite En Stock:</strong> {{ produit.quantiteEnStock }}</p>
+        </div>
+        <!-- Product Image -->
+        <div class="product-image">
+          <img src="/potion_magic.png" alt="Produit du Jour" />
+        </div>
+      </div>
+      <form @submit.prevent="addToCard" class="form">
+        <input v-model="quantite" type="number" placeholder="Quantite" class="input-field" />
+        <button type="submit" class="submit-button">Ajouter au panier</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+
+
   
   <script>
   import axios from 'axios';
@@ -39,68 +58,129 @@
   
   
   <style scoped>
-  /* Ajout de l'image de fond */
-  .login-container {
-    background-image: url('@/assets/mordor.jpg'); /* Ou '/login-background.jpg' si l'image est dans public */
-    background-size: cover; /* Adapte l'image au conteneur */
-    background-position: center; /* Centrer l'image */
-    height: 100vh; /* Prend toute la hauteur de l'écran */
-    width: 100vh;
-    display: flex;
-    justify-content: center; /* Centrer le formulaire horizontalement */
-    align-items: center; /* Centrer le formulaire verticalement */
-  }
-  
-  /* Style du formulaire */
-  form {
-    background-color: rgba(255, 255, 255, 0.8); /* Fond blanc avec transparence */
+  /* Styling the container */
+/* Styling the container */
+.welcome-container {
+  background-image: url('@/assets/background.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #444;
+  font-family: Arial, sans-serif;
+}
+
+/* Styling the content box */
+.content {
+  background-color: rgba(255, 255, 255, 0.9); /* Transparent background */
+  border-radius: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Title styling */
+.title {
+  font-size: 2.5em;
+  color: #8b0000;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Salutation styling */
+.salutation {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.pseudo {
+  color: #007bff;
+}
+
+/* Product section layout */
+.product-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Product details styling */
+.product-details {
+  flex: 2;
+  text-align: left;
+}
+
+.product-details p {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+/* Product image styling */
+.product-image {
+  flex: 1;
+  max-width: 200px;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.form {
+  margin-top: 20px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .content {
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  /* Style des champs de saisie */
-  input {
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+
+  .product-section {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  /* Style du bouton */
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error {
-    color: red;
-    margin-top: 10px;
-  }
-  
-  .products-container {
-    color: black;
+
+  .product-image {
     margin-top: 20px;
-    margin-bottom: 20px;
   }
-  
-  .title {
-    color: rgb(170, 13, 13);
-    font-size: 30px;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+}
+
+
   </style>
   

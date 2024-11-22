@@ -13,6 +13,7 @@
   </div>
 </template>
 
+
 <script>
 import axios from "axios";
 import ProduitComponent from "../components/pageAccueilComponent.vue";
@@ -67,47 +68,46 @@ export default {
 };
 </script>
 
-
 <style scoped>
 /* Ajout de l'image de fond */
 .login-container {
-  background-image: url('@/assets/mordor.jpg'); /* Ou '/login-background.jpg' si l'image est dans public */
-  background-size: cover; /* Adapte l'image au conteneur */
-  background-position: center; /* Centrer l'image */
-  height: 100vh; /* Prend toute la hauteur de l'écran */
-  width: 100vh;
+
   display: flex;
-  justify-content: center; /* Centrer le formulaire horizontalement */
-  align-items: center; /* Centrer le formulaire verticalement */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Style du formulaire */
 form {
-  background-color: rgba(255, 255, 255, 0.8); /* Fond blanc avec transparence */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
 }
 
 /* Style des champs de saisie */
 input {
   display: block;
-  margin-bottom: 10px;
-  width: 100%;
-  padding: 8px;
+  margin: 15px 0;
+  width: calc(100% - 16px);
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 /* Style du bouton */
 button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -127,9 +127,8 @@ button:hover {
 
 .title {
   color: rgb(170, 13, 13);
-  font-size: 30px;
-  text-align: center;
-  margin-top: 20px;
+  font-size: 32px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 </style>
