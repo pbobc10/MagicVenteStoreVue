@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>Produit du Jour</h1>
-    <ul v-if="produits.length">
-      <li v-for="produit in produits" :key="produit.id">
-        {{ produit.reference }} - {{ produit.libelle }} - {{ produit.prix }} currency units - {{ produit.quantiteEnStock }} in stock
-      </li>
-    </ul>
+    <h3>Produit du Jour</h3>
+    <div v-if="produit ">
+      <p>Reference:   {{ produit.reference }} </p>
+      <p>Libelle: {{ produit.libelle }} </p>
+      <p>Prix:  {{ produit.prix }} </p>
+      <p>Quantite En Stock: {{ produit.quantiteEnStock }}</p>
+    </div>
     <p v-else>No products available.</p>
   </div>
 </template>
@@ -14,9 +15,10 @@
 import axios from 'axios';
 
 export default {
+  name: 'PageAccueilComponent',
   data() {
     return {
-      produits: []
+      produit: {}
     };
   },
   mounted() {
@@ -24,9 +26,10 @@ export default {
   },
   methods: {
     getProduits() {
-      axios.get('https://localhost:7290/api/Produit')
+      axios.get('https://localhost:7290/api/Produit/true')
         .then(response => {
-          this.produits = response.data;
+          this.produit = response.data;
+          //console.log(this.produit);
         })
         .catch(error => {
           console.error('Error fetching produits:', error);
