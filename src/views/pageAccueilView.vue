@@ -26,6 +26,7 @@ export default {
       pseudo: "",
       motDePasse: "",
       message: "",
+      nomPrenom: "",  
       produit: Object // Example value; replace with actual product data
     };
   },
@@ -36,7 +37,7 @@ export default {
       
         this.$router.push({
           name: "pageAccueilPerso",
-          params: { pseudo: this.pseudo },
+          params: { pseudo: this.nomPrenom },
         });
       // }
     },
@@ -54,6 +55,7 @@ export default {
           }
         );
         this.message = response.data.Message;
+        this.nomPrenom = response.data.nom + " " + response.data.prenom;
         console.log(response.status);
         console.log(response.data.message);
         this.redirection(); // Call redirection after successful login
